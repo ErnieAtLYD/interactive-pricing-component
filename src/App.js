@@ -13,11 +13,12 @@ function App() {
   const [pageViews, setPageViews] = useState(100);
   const [isYearly, setIsYearly] = useState(false);
 
-  const getPrice = (views) => {
-    if (views < 50) return 8;
-    if (views < 100) return 16;
-    if (views < 500) return 24;
-    return 36;
+  const getPrice = (views, isYearly) => {
+    let discountRate = isYearly ? 0.75 : 1;
+    if (views < 50) return 8 * discountRate;
+    if (views < 100) return 16 * discountRate;
+    if (views < 500) return 24 * discountRate;
+    return 36 * discountRate;
   };
 
   return (
@@ -60,7 +61,7 @@ function App() {
         </div>
         <div className="pricing-component__pricing">
           <span className="pricing-component__pricing--price">
-            ${getPrice(pageViews)}.00
+            ${getPrice(pageViews, isYearly)}.00
           </span>{" "}
           / month
         </div>
